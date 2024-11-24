@@ -4,53 +4,39 @@
     <title>Songs Homepage - Welcome to My Music Store</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <style type="text/css">
-        body {
-            width: 800px;
-            margin: auto;
-        }
-    </style>
 </head>
 <body>
-<header>
+<header class="bg-primary text-white text-center py-3">
     <h1>Welcome to My Music Store</h1>
 </header>
-<main>
-    <h2>Choose a song:</h2>
-    <!-- Display radio buttons for each song,
-            the value should be the trackId
-            and the displayed text should be Title: <songTitle>, Genre:<genre>, Release Year: <releaseYear> -->
-    <form th:method = "GET" th:action = "@{/artist}">
-        <div th:each="song : ${songs}">
-            <input type="radio" name="songItem" th:id="${song.getTrackID()}" th:value="${song.getTrackID()}">
-            <label th:for="${song.getTrackID()}" th:text="'Title: '+${song.getTitle()}+', Genre:'+${song.getGenre()}+', Release Year: '+${song.getReleaseYear()}+', Album name: '+${song.getAlbum().getName()}"></label>
-            <th:block>
-                <a th:href="@{'/songs/delete/{songId}' (songId=${song.getId()})}"
-                   class="btn btn-sm btn-danger">
-                    <i>Delete</i>
-                </a>
-            </th:block>
-            <th:block>
-                <a th:href="@{'/songs/edit-form/{id}' (id=${song.getId()})}"
-                   class="btn btn-sm btn-info edit-product">
-                    <i>Edit</i>
-                </a>
-            </th:block>
+<main class="container my-5">
+    <h2 class="text-center mb-4">Choose a Song:</h2>
+    <form th:method="GET" th:action="@{/artist}">
+        <div class="list-group">
+            <div th:each="song : ${songs}" class="list-group-item d-flex align-items-center justify-content-between">
+                <div>
+                    <input type="radio" name="songItem" th:id="${song.getTrackID()}" th:value="${song.getTrackID()}" class="mr-2">
+                    <label th:for="${song.getTrackID()}" th:text="'Title: '+${song.getTitle()}+', Genre:'+${song.getGenre()}+', Release Year: '+${song.getReleaseYear()}+', Album name: '+${song.getAlbum().getName()}"></label>
+                </div>
+                <div>
+                    <a th:href="@{'/songs/delete/{songId}' (songId=${song.getId()})}" class="btn btn-sm btn-danger mr-2">
+                        <i>Delete</i>
+                    </a>
+                    <a th:href="@{'/songs/edit-form/{id}' (id=${song.getId()})}" class="btn btn-sm btn-info">
+                        <i>Edit</i>
+                    </a>
+                </div>
+            </div>
         </div>
-        <input type='submit' value='Submit'>
+        <div class="text-center mt-4">
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
     </form>
-
-    <div class="col-sm-12 col-md-12">
-        <a href="/songs/add-form" class="btn btn-block btn-dark ">
-            Add new song
+    <div class="text-center mt-4">
+        <a href="/songs/add-form" class="btn btn-dark">
+            Add New Song
         </a>
     </div>
-
-    <!--    <input type="radio" name="trackId" value="1"> Song 1 <br/>-->
-<!--    <input type="radio" name="trackId" value="2"> Song 2<br/>-->
-<!--    <input type="radio" name="trackId" value="3"> Song 3 <br/>-->
-
 </main>
 </body>
 </html>

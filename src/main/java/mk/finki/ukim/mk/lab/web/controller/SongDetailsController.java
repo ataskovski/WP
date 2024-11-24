@@ -35,7 +35,6 @@ public class SongDetailsController {
         }
 
         model.addAttribute("song", s);
-        model.addAttribute("artist", a);
 
         return "songDetails";
     }

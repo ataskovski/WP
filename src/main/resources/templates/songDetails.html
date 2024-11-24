@@ -2,20 +2,36 @@
 <head>
     <meta charset="utf-8">
     <title>Song Details</title>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<header>
-    <h1 th:text="${song.getTitle()}">Song title </h1>
-    <h2 th:text="${song.getAlbum().getName()}">Song album</h2>
+<body>
+<header class="bg-dark text-white text-center py-3">
+    <h1 th:text="${song.getTitle()}">Song Title</h1>
+    <h2 th:text="${song.getAlbum().getName()}" class="font-italic">Song Album</h2>
 </header>
-<section>
-    <h2 th:text="${song.getGenre()}">Genre</h2>
-    <h2 th:text="${song.getReleaseYear()}">Year</h2>
-    <h2>Performers:</h2>
-    <ul th:each="artist : ${song.getPerformers()}">
-        <li th:text="'First name: '+${artist.getFirstName()}+', Last Name:'+${artist.getLastName()}+', Bio: '+${artist.getBio()}"></li>
-    </ul>
-</section>
-
+<div class="container my-5">
+    <section class="mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Details</h2>
+                <p class="card-text">
+                    <strong>Genre:</strong> <span th:text="${song.getGenre()}">Genre</span>
+                </p>
+                <p class="card-text">
+                    <strong>Release Year:</strong> <span th:text="${song.getReleaseYear()}">Year</span>
+                </p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Performers:</h2>
+        <ul class="list-group">
+            <li th:each="artist : ${song.getPerformers()}" class="list-group-item">
+                <span th:text="'First name: '+${artist.getFirstName()}+', Last Name:'+${artist.getLastName()}+', Bio: '+${artist.getBio()}"></span>
+            </li>
+        </ul>
+    </section>
+</div>
 </body>
 </html>
