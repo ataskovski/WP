@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Add new Performer to Song</title>
+    <style type = "text/css">
+        body {
+            width: 800px;
+            margin: auto;
+        }
+        table {
+            width:100%;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding:3px 2px;
+        }
+        section {
+            float: left;
+            margin: 0 1.5%;
+            width: 63%;
+        }
+        aside {
+            float: right;
+            margin: 0 1.5%;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Select the Artist to add to the List of Performers </h1>
+</header>
+<section>
+    <h2>Select artist:</h2>
+    <!-- Make changes to this code to dynamically display radio buttons for each artist as in the example -->
+    <form th:method = "post" th:action = "@{/song-details}">
+        <input type="hidden" name="songItem" th:value="${trackID}">
+        <div th:each="artist : ${artists}">
+            <input type="radio" name="artistItem" th:id="${artist.getID()}" th:value="${artist.getID()}">
+            <label th:for="${artist.getID()}" th:text="'First name: '+${artist.getFirstName()}+', Last Name:'+${artist.getLastName()}+', Bio: '+${artist.getBio()}"></label>
+        </div>
+        <input type='submit' value='Add artist'>
+    </form>
+<!--    <input type="radio" name="artistId" value="1"> Axl Rose <br/>-->
+<!--    <input type="radio" name="artistId" value="2"> Jon Bon Jovi <br/>-->
+<!--    <input type="radio" name="artistId" value="3"> David Bowie <br/>-->
+<!--    <br/>-->
+
+<!--    <input type='submit' value='Add artist'>-->
+    <h2>Select artist to see details</h2>
+    <form th:method = "POST" th:action = "@{/artist/details}">
+        <div th:each="artist : ${artists}">
+            <input type="radio" name="artistItem" th:id="${artist.getID()}" th:value="${artist.getID()}">
+            <label th:for="${artist.getID()}" th:text="'First name: '+${artist.getFirstName()}+', Last Name:'+${artist.getLastName()}+', Bio: '+${artist.getBio()}"></label>
+        </div>
+        <input type='submit' value='See details for artist'>
+    </form>
+
+</section>
+<aside>
+    <table>
+        <tr>
+            <!-- change to show selected trackId -->
+            <td><b th:text="${trackID}"></b></td>
+            <td>2</td>
+        </tr>
+    </table>
+</aside>
+</body>
+</html>
