@@ -1,6 +1,5 @@
 package mk.finki.ukim.mk.lab.service;
 
-import mk.finki.ukim.mk.lab.model.Album;
 import mk.finki.ukim.mk.lab.model.Artist;
 import mk.finki.ukim.mk.lab.model.Song;
 
@@ -14,4 +13,6 @@ public interface SongService {
     Optional<Song> findById(Long id);
     void deleteById(Long id);
     Optional<Song> save(String trackID, String title, String genre, int releaseYear, Long albumID);
+    Optional<Song> update(Long id, String trackID, String title, String genre, int releaseYear, Long albumID);
+    List<Song> findAllByAlbum_Id(Long albumId);
 }

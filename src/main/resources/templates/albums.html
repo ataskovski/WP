@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Songs Homepage - Welcome to My Music Store</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<header class="bg-primary text-white text-center py-3">
+    <h1>Welcome to My Music Store</h1>
+    <div class="text-center mt-4">
+        <a href="/songs" class="btn btn-dark">
+            Show Songs
+        </a>
+    </div>
+</header>
+<main class="container my-5">
+    <h2 class="text-center mb-4">Choose an Album:</h2>
+    <div class="list-group">
+        <!-- Display album list -->
+        <div th:each="album : ${albums}" class="list-group-item d-flex align-items-center justify-content-between">
+            <div>
+                <span th:text="'Title: '+${album.name}+', Genre: '+${album.genre}+', Release Year: '+${album.releaseYear}"></span>
+            </div>
+            <div>
+                <!-- "See songs in album" button -->
+                <a th:href="@{'/albums/show-details/{id}' (id=${album.id})}" class="btn btn-dark">
+                    See songs in album
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conditional block to show songs of a selected album -->
+    <section th:if="${showDetails}">
+        <h2 class="text-center mb-4" th:text="'Songs in Album: '+${albumToShow.name}"></h2>
+        <div class="list-group">
+            <div th:each="song : ${songs}" class="list-group-item">
+                <span th:text="'Title: '+${song.title}+', Genre: '+${song.genre}+', Release Year: '+${song.releaseYear}"></span>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="/albums" class="btn btn-dark">
+                Close
+            </a>
+        </div>
+    </section>
+</main>
+</body>
+</html>

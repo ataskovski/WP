@@ -1,4 +1,4 @@
-package mk.finki.ukim.mk.lab.repository;
+package mk.finki.ukim.mk.lab.repository.inmemory;
 
 import mk.finki.ukim.mk.lab.bootstrap.DataHolder;
 import mk.finki.ukim.mk.lab.model.Album;
@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Repository
-public class SongRepository {
+public class InMemorySongRepository {
     public List<Song> findAll() {
         return DataHolder.songs;
     }
@@ -36,7 +36,7 @@ public class SongRepository {
         if (a == null) {
             throw new IllegalArgumentException();
         }
-        Song s = new Song(trackID, title, genre, releaseYear);
+        Song s = new Song(trackID, title, genre, releaseYear,a);
         s.addAlbum(a);
         a.addSongToAlbum(s);
         DataHolder.songs.removeIf(song -> song.getTitle().equals(s.getTitle()));

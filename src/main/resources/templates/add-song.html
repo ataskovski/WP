@@ -61,11 +61,11 @@
                         <label>Album</label>
                         <select name="album" class="form-control">
                             <option th:if="${song} != null"
-                                    th:selected="${song.getAlbum() != null &&
-                                    song.getAlbum().getId() == song.getId()}"
                                     th:each="album : ${albums}"
                                     th:value="${album.getId()}"
-                                    th:text="${album.getName()}">
+                                    th:text="${album.getName()}"
+                                    th:selected="${song.getAlbum() != null &&
+                                    song.getAlbum().getId() == album.getId()}">
                             </option>
                             <option th:if="${song} == null"
                                     th:each="album : ${albums}"
