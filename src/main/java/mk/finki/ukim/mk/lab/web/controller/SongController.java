@@ -30,7 +30,6 @@ public class SongController {
         List<Song> songs = this.songService.listSongs();
         model.addAttribute("songs", songs);
         return "listSongs";
-
     }
 
     @GetMapping("/delete/{id}")
@@ -57,7 +56,7 @@ public class SongController {
             model.addAttribute("albums", albums);
             return "add-song";
         }
-        return "redirect:/songs?error=ProductNotFound";
+        return "redirect:/songs?error=SongNotFound";
     }
 
 
@@ -69,7 +68,12 @@ public class SongController {
                            @RequestParam String genre,
                            @RequestParam int release_year,
                            @RequestParam Long album) {
-        this.songService.save(trackID, title, genre, release_year, album);
+        if (id != null) {
+            this.songService.update(id, trackID, title, genre, release_year, album);
+        } else {
+            this.songService.save(trackID, title, genre, release_year, album);
+        }
+
         return "redirect:/songs";
     }
 
